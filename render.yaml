@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: qa-testcase-generator-ai-assistant
+    env: node
+    plan: free
+    autoDeploy: true
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: AI_MODEL
+        value: gpt-4o-mini
+      - key: OPENAI_TIMEOUT_MS
+        value: "10000"
+      - key: RATE_LIMIT_WINDOW_SECONDS
+        value: "300"
+      - key: RATE_LIMIT_MAX_REQUESTS
+        value: "5"
+      - key: CORS_ORIGINS
+        value: "*"

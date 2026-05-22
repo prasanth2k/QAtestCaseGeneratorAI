@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="api-base-url" content="">
+  <title>QA Test Case Generator and AI Assistant</title>
+  <meta
+    name="description"
+    content="Generate structured QA test cases or ask a general AI assistant in the same OpenAI-backed web app."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero reveal">
+      <div class="hero-copy">
+        <p class="eyebrow">Open AI Without User Login</p>
+        <h1>Turn raw requirements into QA-ready test cases.</h1>
+        <p class="hero-text">
+          Paste a user story or any question, choose the action you want, and get either
+          structured test cases or a normal AI response through a server-side OpenAI call.
+        </p>
+      </div>
+
+      <aside class="hero-card">
+        <p class="card-label">Includes</p>
+        <ul class="hero-list">
+          <li>Functional, negative, edge, and BDD modes</li>
+          <li>Validation and error scenario coverage</li>
+          <li>General AI assistant replies in the same window</li>
+          <li>Excel export for generated cases</li>
+        </ul>
+      </aside>
+    </header>
+
+    <main class="workspace reveal">
+      <section class="panel composer-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Input</p>
+            <h2>Generate test cases or ask AI</h2>
+          </div>
+          <p class="panel-note">Endpoints: <span>/generate-testcases</span> and <span>/ask-ai</span></p>
+        </div>
+
+        <div class="control-row control-row-top">
+          <div class="field-group">
+            <label class="field-label" for="actionType">Action</label>
+            <select id="actionType">
+              <option value="testcases">Generate Test Cases</option>
+              <option value="assistant">Ask AI Assistant</option>
+              <option value="voice">Voice AI Assistant</option>
+            </select>
+          </div>
+        </div>
+
+        <label class="field-label" for="userStory">User story or requirement</label>
+        <textarea
+          id="userStory"
+          placeholder="Example: As a guest user, I want to search for pharmacies by ZIP code so that I can find nearby in-network options without logging in. Or ask a general question for the AI assistant."
+          rows="10"
+        ></textarea>
+
+        <div class="control-row">
+          <div class="field-group" id="testTypeGroup">
+            <label class="field-label" for="testType">Test type</label>
+            <select id="testType">
+              <option value="Functional">Functional</option>
+              <option value="Negative">Negative</option>
+              <option value="Edge Cases">Edge Cases</option>
+              <option value="BDD Format">BDD Format</option>
+            </select>
+          </div>
+
+          <div class="actions">
+            <button id="generateBtn" class="button button-primary" type="button">Generate Test Cases</button>
+            <button id="askAiBtn" class="button button-secondary" type="button">Ask AI</button>
+            <button id="voiceBtn" class="button button-secondary" type="button">Start Voice Chat</button>
+            <button id="exportBtn" class="button button-secondary" type="button" disabled>Export to Excel</button>
+          </div>
+        </div>
+
+        <p id="statusMessage" class="status-message" aria-live="polite"></p>
+      </section>
+
+      <section class="panel results-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Output</p>
+            <h2>Response</h2>
+          </div>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+          Generated test cases or assistant responses will appear here.
+        </div>
+
+        <div id="assistantWrapper" class="assistant-wrapper is-hidden">
+          <div class="assistant-response-label">AI Assistant</div>
+          <div id="assistantResponse" class="assistant-response"></div>
+        </div>
+
+        <div id="resultsWrapper" class="table-wrapper is-hidden">
+          <table id="resultsTable">
+            <thead>
+              <tr>
+                <th>Test ID</th>
+                <th>Scenario</th>
+                <th>Precondition</th>
+                <th>Steps</th>
+                <th>Expected Result</th>
+                <th>Priority</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

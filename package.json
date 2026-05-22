@@ -1,0 +1,15 @@
+{
+  "name": "qa-testcase-generator-ai-assistant",
+  "version": "1.0.0",
+  "private": true,
+  "description": "QA test case generator and AI assistant without a Python runtime.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "openai": "^4.104.0"
+  }
+}
